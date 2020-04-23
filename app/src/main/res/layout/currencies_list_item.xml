@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/currency_icon_holder"
+            android:layout_width="@dimen/currency_icon_size"
+            android:layout_height="@dimen/currency_icon_size"
+            android:layout_margin="@dimen/vertical_margin_regular"
+            android:src="@drawable/ic_sweden"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/currency_abbreviation"
+            style="@style/CardMajorText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/vertical_margin_regular"
+            android:layout_marginEnd="@dimen/vertical_margin_regular"
+            app:layout_constraintBottom_toTopOf="@+id/currency_full_name"
+            app:layout_constraintEnd_toStartOf="@+id/appCompatEditText"
+            app:layout_constraintStart_toEndOf="@+id/currency_icon_holder"
+            app:layout_constraintTop_toTopOf="@+id/currency_icon_holder"
+            tools:text="EUR" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/currency_full_name"
+            style="@style/CardMinorText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/currency_icon_holder"
+            app:layout_constraintStart_toStartOf="@+id/currency_abbreviation"
+            app:layout_constraintEnd_toEndOf="@+id/currency_abbreviation"
+            app:layout_constraintTop_toBottomOf="@+id/currency_abbreviation"
+            tools:text="Euro" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/appCompatEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/vertical_margin_regular"
+            android:minWidth="80dp"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1183.06"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

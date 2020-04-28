@@ -112,7 +112,7 @@ class CurrencyConversionsViewModel : BaseViewModel() {
                 showLoading.onNext(false)
                 error.onNext(it)
             })
-            .addTo(disposable)
+            .addTo(networkDisposable)
     }
 
     private fun resetValues() {

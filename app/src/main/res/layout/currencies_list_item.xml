@@ -66,6 +66,7 @@
             app:baseCurrencyChanged="@{ viewModel.setCurrencyQuantity }"
             tools:text="1183.06"
             android:inputType="numberDecimal"
+            android:imeOptions="actionDone"
             android:maxLength="14"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

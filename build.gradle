@@ -11,8 +11,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.6.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath "io.realm:realm-gradle-plugin:6.0.2"
     }
 }
 
@@ -21,8 +20,10 @@ allprojects {
         google()
         jcenter()
 
-        maven {}
+        maven { url "https://jitpack.io" }
     }
+
+    group = 'io.realm'
 }
 
 task clean(type: Delete) {

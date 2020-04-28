@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">ConversionsApp</string>
+    <string name="message_please_wait">Пожалуйста подождите</string>
+
+    <string name="currency_usd">US Dollar</string>
+    <string name="currency_euro">Euro</string>
+    <string name="currency_swedish">Swedish Krona</string>
+    <string name="currency_canadian_dollar">Canadian Dollar</string>
+    <string name="currency_full_name_text">Currency full name</string>
 </resources>

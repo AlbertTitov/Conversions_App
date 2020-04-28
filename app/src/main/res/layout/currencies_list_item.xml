@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable name="model" type="com.newfarm.rates_and_conversions.presentationLayer.model.Currency"/>
+        <variable name="viewModel" type="com.newfarm.rates_and_conversions.presentationLayer.viewModel.CurrencyConversionsViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +18,7 @@
             android:layout_width="@dimen/currency_icon_size"
             android:layout_height="@dimen/currency_icon_size"
             android:layout_margin="@dimen/vertical_margin_regular"
-            android:src="@drawable/ic_sweden"
+            app:resource="@{ model.currencyImage }"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -33,6 +34,7 @@
             app:layout_constraintEnd_toStartOf="@+id/appCompatEditText"
             app:layout_constraintStart_toEndOf="@+id/currency_icon_holder"
             app:layout_constraintTop_toTopOf="@+id/currency_icon_holder"
+            android:text="@{ model.name }"
             tools:text="EUR" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -44,9 +46,10 @@
             app:layout_constraintStart_toStartOf="@+id/currency_abbreviation"
             app:layout_constraintEnd_toEndOf="@+id/currency_abbreviation"
             app:layout_constraintTop_toBottomOf="@+id/currency_abbreviation"
+            android:text="@string/currency_full_name_text"
             tools:text="Euro" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.newfarm.rates_and_conversions.presentationLayer.view.ObservableEditText
             android:id="@+id/appCompatEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +59,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="1183.06"/>
+            app:isBase="@{ viewModel.baseCurrency.equals(model) }"
+            app:baseAmount="@{ viewModel.baseCurrencyQuantity }"
+            app:currencyRate="@{ model.rate }"
+            app:selectionCallback="@{ () -> viewModel.resetBaseCurrency(model) }"
+            app:baseCurrencyChanged="@{ viewModel.setCurrencyQuantity }"
+            tools:text="1183.06"
+            android:inputType="numberDecimal"
+            android:maxLength="14"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

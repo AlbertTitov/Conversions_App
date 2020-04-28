@@ -5,8 +5,11 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.appcompat.widget.AppCompatEditText
 import io.reactivex.subjects.PublishSubject
+
 
 class ObservableEditText : AppCompatEditText {
 
@@ -18,6 +21,7 @@ class ObservableEditText : AppCompatEditText {
             field = value
             if (value) {
                 requestFocus()
+                showTheKeyboard(this.context, this)
             }
         }
 
@@ -58,5 +62,11 @@ class ObservableEditText : AppCompatEditText {
         super.onDetachedFromWindow()
         selectionCallback = {}
         baseCurrencyChangedCallback = null
+    }
+
+    private fun showTheKeyboard(context: Context, editText: EditText?) {
+        val imm: InputMethodManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
     }
 }

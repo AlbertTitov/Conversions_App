@@ -26,6 +26,7 @@ open class RootViewModel : BaseObservable {
     var error: PublishSubject<Throwable> = PublishSubject.create()
 
     val disposable = CompositeDisposable()
+    val networkDisposable = CompositeDisposable()
 
     open fun onStart(context: Context) {
         Log.d(TAG, "onStart")
@@ -40,6 +41,7 @@ open class RootViewModel : BaseObservable {
         realm.close()
         realmInMemory.close()
         disposable.clear()
+        networkDisposable.clear()
         Log.d(TAG, """onStop disposable - ${disposable.size()}""")
     }
     open fun onPause() {

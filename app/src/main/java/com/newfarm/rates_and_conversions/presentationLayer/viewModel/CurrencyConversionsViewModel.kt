@@ -80,8 +80,14 @@ class CurrencyConversionsViewModel : BaseViewModel() {
         }
 
     fun resetBaseCurrency(model: Currency) {
-
         if (model.name != baseCurrency?.name) {
+            /***
+             * Данные могут перезаписаться rate'ами предыдущей базовой валюты, в течение 1 сек будем видеть невалидные данные.
+             * Поэтому отменяем подписку на предыдущий запрос***/
+            networkDisposable.clear()
+
+            showLoading.onNext(true)
+
             realm.executeTransactionSafe {
                 currencyRates!!.firstOrNull { it.isBase }?.isBase = false
                 currencyRates!!.first { it.name == model.name }.isBase = true
@@ -100,8 +106,8 @@ class CurrencyConversionsViewModel : BaseViewModel() {
         }
         requestCurrencyRates(baseCurrency?.name ?: DEFAULT_BASE_CURRENCY)
             .subscribe({
-                resetValues()
                 showLoading.onNext(false)
+                resetValues()
             },{
                 showLoading.onNext(false)
                 error.onNext(it)
@@ -113,15 +119,13 @@ class CurrencyConversionsViewModel : BaseViewModel() {
         currencyRates = null
         currencyConversionsAdapter = null
 
-        if (baseCurrency == null) {
-            notifyPropertyChanged(BR.baseCurrency)
+        notifyPropertyChanged(BR.baseCurrency)
 
-            /*** Если запросили данные по сети и в списке валют нет валюты с признаком "базовый", то
-             *   в качестве базовой валюты принимаем первую из списка ***/
-            if (baseCurrency == null) {
-                baseCurrency = currencyRates!!.first()
-                notifyPropertyChanged(BR.baseCurrency)
-            }
+        /*** Если запросили данные по сети и в списке валют нет валюты с признаком "базовый", то
+         *   в качестве базовой валюты принимаем первую из списка ***/
+        if (baseCurrency == null) {
+            baseCurrency = currencyRates!!.first()
+            notifyPropertyChanged(BR.baseCurrency)
         }
     }
 

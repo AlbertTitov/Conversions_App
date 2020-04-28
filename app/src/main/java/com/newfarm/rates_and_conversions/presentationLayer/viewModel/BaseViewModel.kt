@@ -39,7 +39,9 @@ open class BaseViewModel : RootViewModel() {
                      * "назначения" выбранной валюты в качестве базовой.
                      * Поэтому исключаем базовую валюту из списка синхронизируемых; к тому же, нам не нужен "rate" выбранной валюты, а важно только её количество ***/
                     val baseCurrencySelected = realm.where(Currency::class.java).equalTo("isBase", true).findFirst()
-                    realm.copyToRealmOrUpdate(response.filter { it != baseCurrencySelected })
+                    if (!response.map { it.name }.contains(baseCurrencySelected?.name)) {
+                        realm.copyToRealmOrUpdate(response)
+                    }
                 }
                 true
             }

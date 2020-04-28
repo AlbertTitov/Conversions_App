@@ -21,7 +21,7 @@ class ObservableEditText : AppCompatEditText {
             field = value
             if (value) {
                 requestFocus()
-                showTheKeyboard(this.context, this)
+                //showTheKeyboard(this.context, this)
             }
         }
 

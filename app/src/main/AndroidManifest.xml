@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".presentationLayer.view.activity.CurrencyConversionsActivity"
-            android:launchMode="singleInstance">
+            android:launchMode="singleInstance"
+            android:windowSoftInputMode="stateAlwaysVisible">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
